@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/interconnections-api.iml" filepath="$PROJECT_DIR$/.idea/modules/interconnections-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/interconnections-api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/interconnections-api_main.iml" group="interconnections-api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/interconnections-api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/interconnections-api_test.iml" group="interconnections-api" />
+    </modules>
+  </component>
+</project>
