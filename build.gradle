@@ -1,0 +1,21 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'war'
+
+war {
+    baseName = 'interconnections'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile 'org.springframework:spring-webmvc:4.3.4.RELEASE'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.5'
+    compileOnly 'javax.servlet:javax.servlet-api:3.0.1'
+}
