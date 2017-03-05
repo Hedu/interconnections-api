@@ -6,9 +6,7 @@ package com.hedu.ryanair;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 
-import com.hedu.ryanair.routes.RouteUtils;
-import com.hedu.ryanair.schedules.ScheduleUtils;
-import org.springframework.context.annotation.Bean;
+import com.hedu.ryanair.schedules.util.ScheduleService;
 import org.springframework.web.client.RestTemplate;
 
 public class Application {
@@ -19,9 +17,9 @@ public class Application {
         RestTemplate restTemplate = new RestTemplate();
         Quote quote = restTemplate.getForObject("http://gturnquist-quoters.cfapps.io/api/random", Quote.class);
         System.out.println(quote.toString());
-        //RouteUtils.getRoutes();
+        //RouteService.getRoutes();
 
-        ScheduleUtils.getSchedules("DUB","WRO",2017,6);
+        ScheduleService.getSchedules("DUB","WRO",2017,6);
     }
 
 }

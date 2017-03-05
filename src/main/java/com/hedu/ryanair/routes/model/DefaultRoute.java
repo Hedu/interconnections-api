@@ -1,4 +1,4 @@
-package com.hedu.ryanair.routes;
+package com.hedu.ryanair.routes.model;
 
 /**
  * Created by hedu on 4/03/17.

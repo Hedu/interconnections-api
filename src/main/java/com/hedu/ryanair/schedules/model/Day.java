@@ -1,4 +1,4 @@
-package com.hedu.ryanair.schedules;
+package com.hedu.ryanair.schedules.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

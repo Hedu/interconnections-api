@@ -1,4 +1,4 @@
-package com.hedu.ryanair.schedules;
+package com.hedu.ryanair.schedules.model;
 
 /**
  * Created by hedu on 4/03/17.

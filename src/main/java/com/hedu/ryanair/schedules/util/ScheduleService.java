@@ -1,5 +1,7 @@
-package com.hedu.ryanair.schedules;
+package com.hedu.ryanair.schedules.util;
 
+import com.hedu.ryanair.schedules.model.DefaultSchedule;
+import com.hedu.ryanair.schedules.model.Schedule;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -10,7 +12,7 @@ import java.util.Map;
 /**
  * Created by hedu on 4/03/17.
  */
-public class ScheduleUtils {
+public class ScheduleService {
 
     public static final String SCHEDULES_URL =
         "https://api.ryanair.com/timetable/3/schedules/{departure}/{arrival}/years/{year}/months/{month}";
