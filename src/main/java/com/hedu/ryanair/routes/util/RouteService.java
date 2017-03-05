@@ -30,6 +30,16 @@ public class RouteService {
         return Arrays.asList(routes);
     }
 
+    static public List<Route> getRoutesByAirportFrom(String airportFrom) {
+
+        return RouteUtil.getRoutesByAirportFrom(getRoutes(), airportFrom);
+    }
+
+    static public List<Route> getRoutesByAirportTo(String airportTo) {
+
+        return RouteUtil.getRoutesByAirportTo(getRoutes(), airportTo);
+    }
+
     static public List<Route> getRoutesByAirportFromOrAirportTo(String airportFrom, String airportTo) {
 
         return RouteUtil.getRoutesByAirportFromOrAirportTo(getRoutes(), airportFrom, airportTo);

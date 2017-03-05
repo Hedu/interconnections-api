@@ -22,6 +22,7 @@ public class RouteUtil {
             List<Route> routes, String airportFrom, String airportTo) {
 
         List<Route> result = new ArrayList<>();
+
         if (routes == null || routes.isEmpty() || ( airportFrom == null && airportTo == null)) {
             return result;
         }
