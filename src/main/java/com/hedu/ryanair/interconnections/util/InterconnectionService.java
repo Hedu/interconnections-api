@@ -33,7 +33,7 @@ public class InterconnectionService {
         //create a map which key is the first route and the value is the second route
         Map<Route, Route> routes = new HashMap<>();
         for (Route firstRoute: routesFromDeparture) {
-            if (firstRoute.getAirportFrom() == departure && firstRoute.getAirportTo() == arrival) {
+            if (firstRoute.getAirportFrom().equals(departure) && firstRoute.getAirportTo().equals(arrival)) {
                 routes.put(firstRoute, null );
             }
             else {
