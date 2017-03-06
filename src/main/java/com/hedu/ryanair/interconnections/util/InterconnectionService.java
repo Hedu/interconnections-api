@@ -10,9 +10,8 @@ import com.hedu.ryanair.schedules.model.Day;
 import com.hedu.ryanair.schedules.model.Flight;
 import com.hedu.ryanair.schedules.model.Schedule;
 import com.hedu.ryanair.schedules.util.ScheduleService;
-import com.hedu.ryanair.utils.JavaUtils;
+import com.hedu.ryanair.utils.ConversionUtils;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
@@ -44,11 +43,10 @@ public class InterconnectionService {
             }
         }
 
-        LocalDateTime departureDate = JavaUtils.getISOTime(departureDateTime);
-        LocalDateTime arrivalDate = JavaUtils.getISOTime(arrivalDateTime);
+        LocalDateTime departureDate = ConversionUtils.getISOTime(departureDateTime);
+        LocalDateTime arrivalDate = ConversionUtils.getISOTime(arrivalDateTime);
         LocalDateTime tempDate = departureDate;
 
-        //create a map containing all the months between dates
         Map<Integer, Set<Integer>> yearAndMonth = new HashMap<>();
         while (arrivalDate.isAfter(tempDate)) {
             int year = tempDate.getYear();
@@ -84,7 +82,7 @@ public class InterconnectionService {
                     if (secondRoute == null) {
                         interconnections.addAll(getDirectInterconnections(firstRoute, firstSchedules, year, departureDate, arrivalDate));
                     } else if (!secondSchedules.isEmpty()){
-                        interconnections.addAll(getInterconnections(
+                        interconnections.addAll(getNonDirectInterconnections(
                                 firstRoute, secondRoute, firstSchedules, secondSchedules, year, departureDate, arrivalDate));
                     }
                 }
@@ -100,8 +98,8 @@ public class InterconnectionService {
             int month = schedule.getMonth();
             for (Day day : schedule.getDays()) {
                 for (Flight flight : day.getFlights()) {
-                    LocalTime flightDepartureTime = JavaUtils.getTime(flight.getDepartureTime());
-                    LocalTime flightArrivalTime = JavaUtils.getTime(flight.getArrivalTime());
+                    LocalTime flightDepartureTime = ConversionUtils.getTime(flight.getDepartureTime());
+                    LocalTime flightArrivalTime = ConversionUtils.getTime(flight.getArrivalTime());
 
                     LocalDateTime flightDepartureDate = LocalDateTime.of(
                             year,
@@ -122,8 +120,8 @@ public class InterconnectionService {
                         Leg leg = new Leg(
                                 route.getAirportFrom(),
                                 route.getAirportTo(),
-                                JavaUtils.getISOTime(flightDepartureDate),
-                                JavaUtils.getISOTime(flightArrivalDate));
+                                ConversionUtils.getISOTime(flightDepartureDate),
+                                ConversionUtils.getISOTime(flightArrivalDate));
                         legs.add(leg);
 
                         Interconnection interconnection = new DefaultInterconnection(0, legs);
@@ -135,7 +133,7 @@ public class InterconnectionService {
         return interconnections;
     }
 
-    static public List<Interconnection> getInterconnections(
+    static public List<Interconnection> getNonDirectInterconnections(
             Route firstRoute, Route secondRoute, List<Schedule> firstSchedules, List<Schedule> secondSchedules, int year, LocalDateTime departureDate, LocalDateTime arrivalDate) {
 
         List<Interconnection> interconnections = new ArrayList<>();
@@ -148,10 +146,10 @@ public class InterconnectionService {
                         for (Day secondDay : secondSchedule.getDays()) {
                             if (secondDay.getDay() >= firstDay.getDay()) {
                                 for (Flight secondFlight : secondDay.getFlights()) {
-                                    LocalTime firstFlightDepartureTime = JavaUtils.getTime(firstFlight.getDepartureTime());
-                                    LocalTime firstFlightArrivalTime = JavaUtils.getTime(firstFlight.getArrivalTime());
-                                    LocalTime secondFlightDepartureTime = JavaUtils.getTime(secondFlight.getDepartureTime());
-                                    LocalTime secondFlightArrivalTime = JavaUtils.getTime(secondFlight.getArrivalTime());
+                                    LocalTime firstFlightDepartureTime = ConversionUtils.getTime(firstFlight.getDepartureTime());
+                                    LocalTime firstFlightArrivalTime = ConversionUtils.getTime(firstFlight.getArrivalTime());
+                                    LocalTime secondFlightDepartureTime = ConversionUtils.getTime(secondFlight.getDepartureTime());
+                                    LocalTime secondFlightArrivalTime = ConversionUtils.getTime(secondFlight.getArrivalTime());
 
 
                                     LocalDateTime firstFlightDepartureDate = LocalDateTime.of(
@@ -187,13 +185,13 @@ public class InterconnectionService {
                                         Leg firstLeg = new Leg(
                                                 firstRoute.getAirportFrom(),
                                                 firstRoute.getAirportTo(),
-                                                JavaUtils.getISOTime(firstFlightDepartureDate),
-                                                JavaUtils.getISOTime(firstFlightArrivalDate));
+                                                ConversionUtils.getISOTime(firstFlightDepartureDate),
+                                                ConversionUtils.getISOTime(firstFlightArrivalDate));
                                         Leg secondLeg = new Leg(
                                                 secondRoute.getAirportFrom(),
                                                 secondRoute.getAirportTo(),
-                                                JavaUtils.getISOTime(secondFlightDepartureDate),
-                                                JavaUtils.getISOTime(secondFlightArrivalDate));
+                                                ConversionUtils.getISOTime(secondFlightDepartureDate),
+                                                ConversionUtils.getISOTime(secondFlightArrivalDate));
                                         legs.add(firstLeg);
                                         legs.add(secondLeg);
                                         Interconnection interconnection = new DefaultInterconnection(1, legs);
