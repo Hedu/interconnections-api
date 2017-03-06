@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Created by hedu on 5/03/17.
  */
-public class JavaUtils {
+public class ConversionUtils {
     public static LocalDateTime getISOTime(String str) {
         str = str.replace('T', ' ');
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
