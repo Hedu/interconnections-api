@@ -23,9 +23,9 @@ public class RouteService {
         ResponseEntity<DefaultRoute[]> responseEntity = restTemplate.getForEntity(ROUTES_URL, DefaultRoute[].class);
         Route[] routes = responseEntity.getBody();
 
-        for (Route route: routes) {
+        /*for (Route route: routes) {
             System.out.println(route.toString());
-        }
+        }*/
 
         return Arrays.asList(routes);
     }
