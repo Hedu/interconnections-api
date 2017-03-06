@@ -3,6 +3,7 @@ package com.hedu.ryanair.schedules.util;
 import com.hedu.ryanair.schedules.model.DefaultSchedule;
 import com.hedu.ryanair.schedules.model.Schedule;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -29,14 +30,19 @@ public class ScheduleService {
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(SCHEDULES_URL);
 
         String uri = builder.buildAndExpand(uriParams).toUri().toString();
-        System.out.println("Uri = " + uri);
 
-        ResponseEntity<DefaultSchedule> responseEntity = restTemplate.getForEntity(uri, DefaultSchedule.class);
+        try {
+            ResponseEntity<DefaultSchedule> responseEntity = restTemplate.getForEntity(uri, DefaultSchedule.class);
+            Schedule schedule = responseEntity.getBody();
 
-        Schedule schedule = responseEntity.getBody();
+            //System.out.println(schedule.toString());
 
-        System.out.println(schedule.toString());
+            return schedule;
+        }
+        catch (HttpClientErrorException hcee) {
+            System.out.println("Error connecting to url: " + uri);
+            return null;
+        }
 
-        return schedule;
     }
 }
