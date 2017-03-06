@@ -28,7 +28,7 @@ public class RouteUtil {
         }
 
         for (Route route: routes) {
-            if (route.getAirportFrom() == airportFrom || route.getAirportTo() == airportTo) {
+            if (route.getAirportFrom().equals(airportFrom) || route.getAirportTo().equals(airportTo)) {
                 result.add(route);
             }
         }
